@@ -24,12 +24,12 @@ browser.find_element(By.CSS_SELECTOR, "#gnb_login_button > span.gnb_txt").click(
 # 아이디 입력
 id = browser.find_element(By.CSS_SELECTOR, "#id")
 id.click()
-id.send_keys("bestsy777")
+id.send_keys("id")
 
 # 비밀번호 입력
 pw = browser.find_element(By.CSS_SELECTOR, "#pw")
 pw.click()
-pw.send_keys("muze2005;")
+pw.send_keys("pw")
 
 # 로그인
 browser.implicitly_wait(3)
