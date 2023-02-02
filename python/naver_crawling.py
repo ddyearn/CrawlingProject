@@ -78,6 +78,7 @@ while True:
 		break
 
 f.close()
+browser.close()
 '''
 # 끝까지 스크롤
 a = 0
