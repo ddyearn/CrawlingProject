@@ -1,12 +1,19 @@
-driver.get('http://www.gmarket.co.kr')
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
 
-login = self._driver.find_element(By.ID, 'css_login_box')
-login.click()
+options = webdriver.ChromeOptions()
+UserAgent = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/109.0'
+options.add_argument('user-agent=' + UserAgent)
 
-user_id = self._driver.find_element(By.ID, 'id')
-user_id.send_keys('사용자 ID')
-user_pw = self._driver.find_element(By.ID, 'pwd')
-user_pw.send_keys('사용자 PW')
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-submit = self._driver.find_element(By.XPATH, '//div[@class="btn-login"]/a')
-submit.click()
+driver.get('https://signinssl.gmarket.co.kr/login/login?url=https://www.gmarket.co.kr/')
+
+user_id = driver.find_element(By.ID, 'id')
+user_id.send_keys('skdus3373')
+user_pw = driver.find_element(By.ID, 'pwd')
+user_pw.send_keys('zmfhffld12')
+
+driver.find_element(By.CLASS_NAME, 'btn-login').click()
