@@ -12,8 +12,8 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 driver.get('https://signinssl.gmarket.co.kr/login/login?url=https://www.gmarket.co.kr/')
 
 user_id = driver.find_element(By.ID, 'id')
-user_id.send_keys('skdus3373')
+user_id.send_keys('put id here')
 user_pw = driver.find_element(By.ID, 'pwd')
-user_pw.send_keys('zmfhffld12')
+user_pw.send_keys('put pwd here')
 
 driver.find_element(By.CLASS_NAME, 'btn-login').click()
