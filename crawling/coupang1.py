@@ -13,9 +13,9 @@ ws.append(['이름', '가격', '배송기한', '상세페이지'])
 i = 1
 while True:
     options = webdriver.ChromeOptions()
-    options.add_argument('--headless')
+    #options.add_argument('--headless')
     UserAgent = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/109.0'
-    options.add_argument('user-agent=' + UserAgent)
+    options.add_argument('user-agent=' + UserAgent)    #https://www.whatismybrowser.com/detect/what-is-my-user-agent/에서 본인 UserAgent 복사,붙여넣기
 
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
@@ -31,10 +31,10 @@ while True:
     time.sleep(2)
 
     id_input = driver.find_element(By.XPATH, '//*[@id="login-email-input"]')
-    id_input.send_keys('skdus3373@naver.com')
+    id_input.send_keys('put id here')
 
     pw_input = driver.find_element(By.XPATH, '//*[@id="login-password-input"]')
-    pw_input.send_keys('zmfhffld12')
+    pw_input.send_keys('put pwd here')
 
     driver.find_element(By.XPATH, '/html/body/div[1]/div/div/form/div[5]/button').click()
 
