@@ -14,7 +14,11 @@ options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument('--disable-gpu')
 options.add_argument('lang=ko_KR')
-# options.add_argument("--window-size=10, 200")
+
+# infobar-chrome is being controlled by automated test software 제거 
+options.add_experimental_option("useAutomationExtension", False)
+options.add_experimental_option("excludeSwitches",["enable-automation"])
+
 UserAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/111.0.0.0 Safari/537.36'
 options.add_argument('user-agent=' + UserAgent)
 
@@ -30,6 +34,7 @@ driver.get('http://naver.com')
 elem = driver.find_element(By.CLASS_NAME,'link_login')
 elem.click()
 
+''' headless 모드에서는 pyperclip 사용 불가
 # 3. id 복사 붙여넣기
 elem_id = driver.find_element(By.ID,'id')
 elem_id.click()
@@ -43,6 +48,16 @@ elem_pw.click()
 pyperclip.copy(user_pw)
 elem_pw.send_keys(Keys.CONTROL, 'v')
 time.sleep(1)
+'''
+
+# 자바스크립트로 입력
+driver.execute_script(
+    f"document.querySelector('input[id=\"id\"]').setAttribute('value', '{user_id}')"
+)
+time.sleep(1)
+driver.execute_script(
+    f"document.querySelector('input[id=\"pw\"]').setAttribute('value', '{user_pw}')"
+)
 
 # 5. 로그인 버튼 클릭
 driver.find_element(By.ID,'log.login').click()
