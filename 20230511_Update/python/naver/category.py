@@ -93,7 +93,7 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 driver.implicitly_wait(10)
 
 # Maria DB 연결
-conn = pymysql.connect(host='127.0.0.1', port=3307, user='syeon', password='muze2005', db='cpdb', charset='utf8')
+conn = pymysql.connect(host='127.0.0.1', port=3307, user='', password='', db='', charset='utf8')
 cur = conn.cursor()
 
 GetData = GetData(conn, cur)
@@ -101,73 +101,3 @@ GetTotalAds = GetData.total_category()
 
 conn.close()
 driver.quit()
-
-
-'''
-# tb_total_ads
-# 광고 리스트 : 상품명/판매원가/배송비/카테고리
-
-driver.get("https://search.shopping.naver.com/search/all?query=즉석밥&cat_id=&frm=NVSHATC")
-time.sleep(5)
-
-# html 정보 출력
-html = driver.page_source
-soup = BeautifulSoup(html, 'html.parser')
-f = open("naver_ad.html", "w")
-f.write(soup.prettify())
-f.close()
-
-# csv 저장
-
-
-# mariaDB 저장
-lists = driver.find_elements(By.CSS_SELECTOR, '#content > div.style_content__xWg5l > div.list_basis > div > div:nth-child(1) > div')
-pn = 0
-for li in lists:
-    pn += 1
-    item = li.find_element(By.CLASS_NAME, 'basicList_title__VfX3c').text
-    price = li.find_element(By.CLASS_NAME, 'price_price__LEGN7').text
-    price = price.replace(',', '').replace('원', '')
-    delivery = li.find_element(By.CLASS_NAME, 'price_delivery__yw_We').text
-    del_free = "무료"
-    if del_free in delivery:
-        delivery = "0"
-    category = li.find_element(By.CLASS_NAME, 'basicList_depth__SbZWF').text
-    url = li.find_element(By.TAG_NAME, 'a').get_attribute('href')
-
-    insert = "INSERT INTO tb_total_ads (product_name, product_no, price, delivery_price, product_category, product_url) VALUES('"+item+"', '"+str(pn)+"', '"+price+"', '"+delivery+"', '"+category+"', '"+url+"') "
-    update = "ON DUPLICATE KEY UPDATE price='"+price+"', delivery_price='"+delivery+"', product_category='"+category+"', product_url='"+url+"'"
-    sql = insert + update
-
-cur.execute(sql)
-conn.commit()
-
-conn.close()
-
-# 7. 브라우저 종료
-# browser.close() # 현재 탭만 종료
-driver.quit() # 전체 브라우저 종료
-
-
-user_id = 'bestsy777'
-user_pw = 'muze2005;'
-
-# 네이버쇼핑 이동
-driver.get('https://shopping.naver.com/home')
-
-
-# 로그인
-elem = driver.find_element(By.CLASS_NAME,'gnb_btn_login')
-elem.click()
-# 자바스크립트로 입력
-driver.execute_script(
-    f"document.querySelector('input[id=\"id\"]').setAttribute('value', '{user_id}')"
-)
-time.sleep(1)
-driver.execute_script(
-    f"document.querySelector('input[id=\"pw\"]').setAttribute('value', '{user_pw}')"
-)
-# 로그인 버튼 클릭
-driver.find_element(By.ID,'log.login').click()
-time.sleep(2)
-'''
