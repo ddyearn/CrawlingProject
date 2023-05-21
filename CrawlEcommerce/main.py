@@ -17,7 +17,7 @@ if len (sys.argv) < 3:
 else:
     #argv 값은 문자열이므로, int형 변환 필요  
     site_selection = int(sys.argv[1])
-    operation_selection = int(sys.argv[2])
+    operation_mode = int(sys.argv[2])
 
 if len(sys.argv) >= 5:  #optional parameter, default value=0
     login_mode = int(sys.argv[4])
