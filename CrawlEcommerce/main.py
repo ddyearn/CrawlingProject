@@ -2,6 +2,8 @@ import os
 import sys
 from eleventh.main import Eleventh
 from naver.main import Naver
+from coupang.main import Coupang
+from gmarket.main import Gmarket
 
 site_selection = 0 #0:coupang. 1:gmarket. 2:11st. 3:naver
 operation_mode = 0 #0:search. 1:best. 2:event. 3: category. 4:review
