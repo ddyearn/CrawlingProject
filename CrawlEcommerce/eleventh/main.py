@@ -170,12 +170,6 @@ class EleventhData:
                     
                     productUrl = li.find_element(By.TAG_NAME, 'a').get_attribute('href')
 
-                    product = li.find_element(By.CSS_SELECTOR, 'div > div.c_prd_thumb > a')
-                    product.click()
-
-                    self.driver.implicitly_wait(5)
-                    self.driver.switch_to.window(self.driver.window_handles[-1]) 
-
 
                     
                     discountProvider = 0
